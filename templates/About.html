@@ -1,0 +1,171 @@
+<html lang="en">
+<head>
+    <title>About</title>
+    <style>
+         * {
+            box-sizing: border-box;
+        }
+        .header{
+            background-color: rgba(42, 153, 208, 255);
+            color: white;
+            padding: 15px;
+        }
+        #logo{
+            display: inline-block;
+        }
+       #nav{
+            float: right;
+       }
+       #nav > a{
+        text-decoration: none;
+        display: inline-block;
+       }
+        a{
+            color: white;
+            font-size: large;
+            text-decoration: none;
+        }
+        a:hover{
+            color: whitesmoke;
+            font-size: larger;
+            background-color: blue;
+        }
+        .nav > .nav-btn{
+            display: none;
+        }
+        .nav > #nav-check{
+            display: none;
+        }
+        #topic{
+            float: none;
+            text-align: center;
+        }
+        #first, #second{
+            padding: 15px;
+            margin-bottom: 7px;
+            margin-left: 100px;
+            margin-right: 100px;
+         
+            color: rgb(7, 9, 10);
+            text-align: justify;
+            font-size: 18px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        .top{
+            text-align: center;
+            font-size: 30px;
+            color: rgb(7, 99, 145);
+        }
+        .footer{
+            padding: 15px;
+            margin-bottom: 7px;
+            background-color:rgb(7, 99, 145);
+            color: white;
+            text-align: center;
+            font-size: 14px;
+            font-style: italic;  
+        }
+         /*For desktop: */
+         .col-1{width: 8.33%;}
+        .col-2{width: 16.66%;}
+        .col-3{width: 25%;}
+        .col-4{width: 33.33%;}
+        .col-5{width: 41.66%;}
+        .col-6{width: 50%;}
+        .col-7{width: 58.33%;}
+        .col-8{width: 66.66%;}
+        .col-9{width: 75%;}
+        .col-10{width: 83.33%;}
+        .col-11{width: 91.66%;}
+        .col-12{width: 100%;}
+        
+       @media screen and (max-width:768px){
+            /*For mobile phones*/
+            [class*= "col-"]{
+                width: 100%;
+            }
+            td{
+                width: 150px;
+                color: darkblue;
+            }
+            .nav > .nav-btn{
+                display: inline-block;
+                position: absolute;
+                right: 0px;
+                top: 0px;
+            }
+            .nav > .nav-btn > label {
+                height: 50px;
+                padding: 13px;
+                display: inline-block;
+                width: 50px;
+            }
+            .nav > .nav-btn > label > span {
+                height: 10px;
+                border-top: 2px solid #eee;
+                display: block;
+                width: 25px;
+            }
+            .nav > #nav {
+                position: absolute;
+                height: 0px;
+                transition: all 0.3s ease-in;
+                overflow-y: hidden;
+                top: 50px;
+                display: block;
+                width: 100%;
+                background-color: rgba(42, 153, 208, 0.9);
+                left: 0px;
+            }
+            .nav > #nav > a {
+                display: block;
+                width: 100%;
+            }            
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div class="header">
+            <div id="navfam">
+                <div class="fam" id="logo"><i>...networking made easy</i></div>
+                <div class="fam" id="nav">
+                    <a href="{{ url_for('Home') }}"> Home</a>
+                    <a href="{{ url_for('About') }}"> About</a>
+                </div>
+            </div><br>
+            <div id="topic"><h1>OKUMURA-HATA MODEL</h1></div>
+            </div>
+            
+            <div class="nav-btn">
+                <label for="nav-check">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+            </div><br>
+
+            <div id="first">
+                <h2 class="top">ABOUT THE WEBSITE</h2>
+                <p>This website is a product of the final year project of some students from the University of Olabisi Onabanjo University, Ibogun chapter, Ogun state, Nigeria. This website is an interface for a machine learning model that predicts path loss.</p>
+                <p>This website was born out of the idea that creating a web-app that could predict path loss using the okumura-hata model would save non-programmers the stress of having to go through codes before arriving at the results they need.</p>
+                <p style="font-size: 16px;"><i>Note: Make sure to read the information about Okumura-Hata model as supplied on this page to know the acceptable range of inputs...</i></p>
+            </div>
+
+            <div id="second">
+                <h2 class="top">OKUMURA-HATA MODEL</h2>
+                <p>Okumura-Hata model is a model used for predicting path loss in transmission in external environment. The model, which was formed by Hata, is an empirical formulation based on the data from the Okumura model, and is thus also commonly referred to as the Okumura–Hata model.
+                    The model is used for open, suburban and urban environments.</p>
+                <p>Open environment is one that a lot of open field and little houses or tall trees that will serve as obstruction during transmission.</p>
+                <p>Suburban environment is one that has tall houses or trees that are not too closely packed.</p>
+                <p>Urban environment is one that has tall houses or trees that are so closely packed and this has even greater impact on the transmission power, that is, it increases the path loss.</p>
+                <p>Parameters used in the model includes frequency (in MegaHertz) which ranges from 150 to 1500, transmitter or base antenna height (in meters) which ranges from 30 to 200, 
+                    receiver or mobile antenna height (in meters) which ranges from 1 to 10, and, distance between the base and mobile antennas (in kilometers) which has a maximum value of 20km.</p>
+                </div>
+
+                <div class="footer">
+                    <p>To get your network sorted for any location, contact us at @08156989433</p>
+                    </div>
+            </div>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Okumura-Hata Model</title>
+        <style>
+        * {
+            box-sizing: border-box;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .row:after{
+            content: "";
+            clear: both;
+            display: block;
+        }
+        [class*="col-"]{
+            float: left;
+            padding: 15px;
+        }
+        .header{
+            background-color: rgba(42, 153, 208, 255);
+            color: white;
+            padding: 15px;
+        }
+        #logo{
+            display: inline-block;
+        }
+       #nav{
+            float: right;
+       }
+       #nav > a{
+        text-decoration: none;
+        display: inline-block;
+       }
+        a{
+            color: white;
+            font-size: large;
+            text-decoration: none;
+        }
+        a:hover{
+            color: whitesmoke;
+            font-size: larger;
+            background-color: blue;
+        }
+        .nav > .nav-btn{
+            display: none;
+        }
+        .nav > #nav-check{
+            display: none;
+        }
+        #topic{
+            float: none;
+            text-align: center;
+        }
+        #content{
+            text-align: center;
+            line-height: 15px;
+        }
+        table{
+            text-align: center;
+        }
+        td{
+            width:300px;
+            color:rgb(18, 29, 35);
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        input > label{
+            color: rgb(7, 99, 145);
+        }
+        button{
+            background-color: rgba(4, 83, 122, 0.933) ;
+            width: 100px;
+            height: 40px;
+            color: white;
+            font-size: 16px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        #graph{
+            padding-left: 70px;
+            padding-top: 50px;
+        }
+        .footer{
+            padding: 15px;
+            margin-bottom: 7px;
+            background-color: rgb(7, 99, 145);
+            color: white;
+            text-align: center;
+            font-size: 14px;  
+            font-style: italic;
+        }
+        /*For desktop: */
+        .col-1{width: 8.33%;}
+        .col-2{width: 16.66%;}
+        .col-3{width: 25%;}
+        .col-4{width: 33.33%;}
+        .col-5{width: 41.66%;}
+        .col-6{width: 50%;}
+        .col-7{width: 58.33%;}
+        .col-8{width: 66.66%;}
+        .col-9{width: 75%;}
+        .col-10{width: 83.33%;}
+        .col-11{width: 91.66%;}
+        .col-12{width: 100%;}
+        
+       @media screen and (max-width:768px){
+            /*For mobile phones*/
+            [class*= "col-"]{
+                width: 100%;
+            }
+            #graph{
+                padding: 0px 0px 0px 0px;
+            }
+            td{
+                width: 150px;
+                color: rgb(7, 99, 145);
+            }
+            .nav > .nav-btn{
+                display: inline-block;
+                position: absolute;
+                right: 0px;
+                top: 0px;
+            }
+            .nav > .nav-btn > label {
+                height: 50px;
+                padding: 13px;
+                display: inline-block;
+                width: 50px;
+            }
+            .nav > .nav-btn > label > span {
+                height: 10px;
+                border-top: 2px solid #eee;
+                display: block;
+                width: 25px;
+            }
+            .nav > #nav {
+                position: absolute;
+                height: 0px;
+                transition: all 0.3s ease-in;
+                overflow-y: hidden;
+                top: 50px;
+                display: block;
+                width: 100%;
+                background-color: rgba(42, 153, 208, 0.9);
+                left: 0px;
+            }
+            .nav > #nav > a {
+                display: block;
+                width: 100%;
+            }            
+        }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <div class="header">
+                <div id="navfam">
+                    <div class="fam" id="logo"><i>...networking made easy</i></div>
+                    <div class="fam" id="nav">
+                        <a href="{{ url_for('Home') }}"> Home</a>
+                        <a href="{{ url_for('About') }}"> About</a>
+                    </div>
+                </div><br>
+                <div id="topic"><h1>OKUMURA-HATA MODEL</h1></div>
+            </div>
+                
+            <div class="nav-btn">
+                <label for="nav-check">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+            </div>
+
+                <div class="row">
+                    <div class="col-6">
+                    <div id = "content">
+                        <h1 style="color: rgb(7, 99, 145)"> Predict Path Loss</h1>
+                        <table>
+                            <form action="{{url_for('predict')}}" method="POST">
+                            <tr>
+                                <td>Type of Environment</td>
+                                <td><input type="radio" id="OPEN_LAR" name="Environment" value="OPEN_LAR"><label for="OPEN">OPEN (LARGE AREA)</label><br>
+                                    <input type="radio" id="OPEN_MED" name="Environment" value="OPEN_MED"><label for="OPEN">OPEN (MEDIUM AREA)</label><br>
+                                    <input type="radio" id="SUBURBAN_LAR" name="Environment" value="SUBURBAN_LAR"><label for="SUBURBAN">SUBURBAN (LARGE CITY)</label><br>
+                                    <input type="radio" id="SUBURBAN_MED" name="Environment" value="SUBURBAN_MED"><label for="OPEN">SUBURBAN (MEDIUM CITY)</label><br>
+                                    <input type="radio" id="URBAN_LAR" name="Environment" value="URBAN_LAR"><label for="URBAN_LAR">URBAN (LARGE CITY)</label><br>
+                                    <input type="radio" id="URBAN_MED" name="Environment" value="URBAN_MED"><label for="URBAN_MED">URBAN (MEDIUM CITY)</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Frequency (MegaHertz)</td>
+                                <td><input type="text" name="Frequency" required></td>
+                            </tr>
+                            <tr>
+                                <td>Height of Transmitter (meters)</td>
+                                <td><input type="text" name="BaseA_height" required></td>
+                            </tr>
+                            <tr>
+                                <td>Height of Receiver (meters)</td>
+                                <td><input type="text" name="MobA_height" required></td>
+                            </tr>
+                            <tr>
+                                <td>Distance between Base and Mobile Antennas (Km)</td>
+                                <td><input type="text" name="Distance" required></td>
+                            </tr>
+                            <tr>
+                                <br><br><td><button type="reset">RESET</button></td>
+                                <br><br><td><button type="submit">PREDICT</button></td>
+                            </tr>
+                            </form>
+                        </table><br>
+
+                        <div id="result"><h3 style="color:rgb(7, 99, 145);">{{predicted}}</h3></div>
+                        
+                    </div>
+                    </div>
+                    <div class="col-6" id="graph">
+                        <!--<div class="graphs"><p>The graph of pathloss against height of transmitter</p>
+                        {{graph1}}
+                        </div>
+                        <div class="graphs"><p>The graph of pathloss against height of receiver</p>
+                        {{graph2}}
+                        </div>-->
+                        <img src="{{url_for('static', filename='network.jpg')}}" alt="networking image" height="370px">
+                    </div>
+                </div>
+
+            <div class="footer">
+                <p>To get your network sorted for any location, contact us at @08156989433</p>
+            </div>
+
+
+
+        </div>
+    </body>
+</html>

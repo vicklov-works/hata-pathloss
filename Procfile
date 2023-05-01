@@ -1,2 +1,2 @@
 ECHO is on.
-web: gunicorn project:app
+web: gunicorn project.app:app

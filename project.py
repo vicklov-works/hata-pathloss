@@ -1,11 +1,8 @@
 import math
 from flask import Flask, render_template, request
-#import pickle
 
 
 project = Flask(__name__)
-
-#HATA = pickle.load(open('Hata.pkl', 'rb'))
 
 @project.route('/')
 def Home():
